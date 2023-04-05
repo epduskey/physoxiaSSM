@@ -1,0 +1,31 @@
+Files
+
+bpsetup.R: create mizer object with separate benthic and pelagic habitats
+cal_biomass.R: optimization functions to fit to observed SSB
+cal_growth.R: optimization functions to fit to observed size-at-age
+cal_occupancy.R: optimization function to fit to observed occupancy of cod in the benthic habitat
+cal_yield.R: optimization functions to fit to observed yield
+fsetup.R: create dynamic fishing mortality array
+mizer_replace.R: replace some miscellaneous mizer functions to ensure hypoxia code functions
+otmscale.R: scaling rate functions with oxygen and temperature
+oxysensitivity.R: add oxygen dependence parameters to mizer object
+plot_diet.R: plot diet emerging from model projections
+plot_fmsy.R: plot F_msy over a range of fishing mortalities
+plot_funcs.R: miscellaneous plotting functions
+plot_growth.R: plot modeled size-at-age for a given species
+plot_pcrit.R: plot estimated P_crit calculated for each species as a function of body size
+plot_spectra.R: plot modeled size spectra of each species
+plot_yield.R: plot modeled and observed yield
+rate_constantphys.R: oxygen dependence of all rates without metabolic prioritization
+rate_encounter.R: oxygen dependence of encounter rate
+rate_erag.R: oxygen dependence of energy available for growth and reproduction after accounting for metabolism
+rate_feeding.R: oxygen dependence of feeding
+rate_mortality.R: oxygen dependence of natural mortality
+rate_predation.R: oxygen dependence of predation
+rate_predmort.R: oxygen dependence of predation mortality
+rate_RDI.R: oxygen dependence of density independent reproduction
+rate_resourcemort.R: oxygen dependence of resource mortality
+resource_benthic.R: benthic resource dynamics
+resource_pelagic.R: pelagic resource dynamics
+scenarios.R: function for running oxygen scenarios
+spmat.R: functions to create species parameter matrix for mizer
