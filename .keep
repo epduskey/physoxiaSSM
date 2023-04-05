@@ -1,0 +1,23 @@
+Recall
+
+B: oxygen dependence of benthic food carrying capacity
+O: oxygen dependence of occupancy of cod in the benthic habitat
+M: oxygen dependence of natural mortality of cod and flounder
+P: oxygen dependence of maximum food intake, search rate, assimilation efficiency, and egg survival
+None: no oxygen dependence
+
+Folders
+
+Calibration: folder containing calibrated mizer objects and calibration data
+Code: folder containing various auxiliary functions for the calibration procedure
+Constant Phys: folder containing all output from models without metabolic prioritization
+Data: folder containing data to which oxygen dependence parameters are fit
+Parameters: folder containing parameters for each species that are fixed within the model
+Plots: folder containing all figures arising from project_plot.R, as well as fish and resource drawings
+Scenarios: folder containing all model output and plots from project_scenarios.R
+Sensitivity: folder containing code and output, including plots, from the sensitivity analysis
+
+Files
+
+project_[model].R: calibration with model indicated by [model]
+project_plot.R: plotting all figures
