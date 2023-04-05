@@ -1,0 +1,19 @@
+This folder contains all code necessary to replicate the sensitivity analysis, in which we repeated the entire calibration procedure three additional times with different sets of randomly generated starting values
+
+Recall
+
+B: oxygen dependence of benthic food carrying capacity
+O: oxygen dependence of occupancy of cod in the benthic habitat
+M: oxygen dependence of natural mortality of cod and flounder
+P: oxygen dependence of maximum food intake, search rate, assimilation efficiency, and egg survival
+None: no oxygen dependence
+
+calibration period: 1991-2000
+projection period: 2001-2019
+
+Folders
+
+One: folder containing all 16 project_[model].R files for calibration for model indicated by [model], a project_error.R for calculating weighted error, and a Calibration folder containing all calibration objects for the first repetition
+Two: folder containing all 16 project_[model].R files for calibration for model indicated by [model], a project_error.R for calculating weighted error, and a Calibration folder containing all calibration objects for the second repetition
+Three: folder containing all 16 project_[model].R files for calibration for model indicated by [model], a project_error.R for calculating weighted error, and a Calibration folder containing all calibration objects for the third repetition
+Output: contains final weighted error calculations for the calibration period (cal_[repetition].txt) and for the projection period (proj_[repetition].txt)
