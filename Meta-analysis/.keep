@@ -1,0 +1,12 @@
+This folder contains all data and code necessary to replicate the meta-analysis
+
+Folders
+
+Code: folder containing meta-analysis (gadid_meta.R) and auxiliary functions (all others) for the Stan models and hypothesis testing procedure
+Data: folder containing all meta-analysis data and the figures/tables from which they were extracted
+Output: contains Stan model output
+Searches: contains citations from each stage of the meta-analysis search procedure
+
+Files
+
+meta_results.jpeg: plot from results of meta-analysis
