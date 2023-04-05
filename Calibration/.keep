@@ -1,0 +1,21 @@
+Recall
+
+B: oxygen dependence of benthic food carrying capacity
+O: oxygen dependence of occupancy of cod in the benthic habitat
+M: oxygen dependence of natural mortality of cod and flounder
+P: oxygen dependence of maximum food intake, search rate, assimilation efficiency, and egg survival
+None: no oxygen dependence
+
+calibration period: 1991-2000
+projection period: 2001-2019
+
+Files
+
+[model]_fit.rda: contains all optimized fits to SSB, yield, and growth; the [model] indicates which aspects were oxygen dependent
+[species]_ssb.txt: contains mean annual SSB for each species, indicated by [species]
+params_full_[model].rda: mizer object
+params_time_[model].rda: mizer object directly after fitting to time series during the calibration period, but before casting foreward during the projection period
+params_tune_[model].rda: mizer object directly after fitting to means during calibration period, but before fitting to time series during the calibration period
+ssb_cal.txt: contains mean SSB for each species during the calibration period
+cal_error.txt: weighted error in SSB, yield, and growth for all 16 models during the calibration period
+proj_error.txt: weighted error in SSB, yield, and growth for all 16 models during the projection period
