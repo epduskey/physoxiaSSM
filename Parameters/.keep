@@ -1,0 +1,23 @@
+Recall
+
+calibration period: 1991-2000
+projection period: 2001-2019
+
+Folders
+
+Cod: all fixed parameters for cod, as well as cod_benthic_occupancy.txt data from Casini, Michele, et al. "Spatio-temporal dynamics and behavioural ecology of a “demersal” fish population as detected using research survey pelagic trawl catches: the Eastern Baltic Sea cod (Gadus morhua)." ICES Journal of Marine Science 76.6 (2019): 1591-1600. DOI: 10.1093/icesjms/fsz016
+Flounder: all fixed parameters for flounder
+Herring: all fixed parameters for herring
+Interaction: contains only the interaction.txt file with overlap values calculated from spatially indexed CPUE
+Pcrit: contains only the pcrit_modstep.rda model run on the data from Rogers, Nicholas J., et al. "A new analysis of hypoxia tolerance in fishes using a database of critical oxygen level (Pcrit)." Conservation physiology 4.1 (2016). DOI: 10.14466/CefasDataHub.121
+Sprat: all fixed parameters for sprat
+
+Files (note: all files named [species]_[data].[extension] are within their respective species folder)
+
+[species]_diet.txt: preferred predator-prey mass ratio (PPMR) estimated from diet data
+[species]_fyear.txt: annual estimated fishing mortality from BITS (cod), from Draganik, B., et al. "Status of exploited Baltic flounder stocks in the southern Baltic area (ICES SD 26)." Oceanological and Hydrobiological Studies 36.4 (2007): 47-64. (flounder), or from BIAS (sprat and herring)
+[species]_ivb_cal.txt: annual estimates of inverse von Bertalanffy growth parameters from SMALK data during the calibration period
+[species]_ivb_prj.txt: annual estimates of inverse von Bertalanffy growth parameters from SMALK data during the projection period
+[species]_lh.txt: mean estimated inverse von Bertalanffy growth parameters during the calibration period
+[species]_selectivity.txt: selectivity parameters estimated from fishing mortality given by WGBIFS stock assessments (cod, sprat, and herring) and deduced from minimum size restrictions on retaining flounder
+[species]_wmat.txt: size at maturity determined from probability maturation reaction norms estimated from SMALK data during the calibration period
