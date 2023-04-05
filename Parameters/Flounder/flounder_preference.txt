@@ -1,0 +1,7 @@
+"Item" "Number" "Proportion"
+"1" "Cod" 0 0
+"2" "Flounder" 0 0
+"3" "Sprat" 37 0.0114799875892026
+"4" "Herring" 5 0.00155134967421657
+"5" "Benthic" 3181 0.986968662736581
+"6" "Pelagic" 0 0
