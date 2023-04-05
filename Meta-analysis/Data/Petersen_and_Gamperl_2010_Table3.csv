@@ -1,0 +1,5 @@
+Oxygen_kpa,Acclimation,Ucrit,SE_ucrit
+20,normoxia,1.5,0.04
+20,hypoxia,1.51,0.07
+8.5,normoxia,1.02,0.03
+8.5,hypoxia,1.02,0.05
