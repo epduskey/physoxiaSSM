@@ -1000,7 +1000,7 @@ all.cod$Size_hyp = NA
 # Change item factor level order
 all.cod$Item = factor(all.cod$Item, levels = c("Benthos","Plankton","Cod","Flounder","Sprat","Herring"))
 
-# Average oxygen exposure of mature cod weighted by number
+# Benthic oxygen and size
 oxy.cod = vector(length = 29)
 size.cod = vector(length = 29)
 size.phys = vector(length = 29)
@@ -1034,9 +1034,9 @@ col_all = c(col_benthos, col_plankton, col_cod, col_flounder, col_sprat, col_her
 # Stacked area plot
 p1 = ggplot(all.cod, aes(x = Oxygen, y = Flow_phys, fill = Item)) +
 		geom_area() + xlab("") + ylab("") + labs(title = "MP", fill = "") +
-		scale_fill_manual(values=c(col_benthos,col_plankton,col_cod,col_flounder,col_sprat,col_herring)) +
+		scale_fill_manual(values=col_all) +
 		geom_line(aes(x = Oxygen, y = 2.5*Size_phys),linewidth=1,color="dodgerblue",linetype="dashed") +
-		geom_point(aes(x = Oxygen, y = 2.5*Size, fill = NA), data = size.df, shape = 17, color = "dodgerblue", show.legend = F) +
+		geom_point(aes(x = Oxygen, y = 2.5*Size), data = size.df, shape = 17, color = "dodgerblue", show.legend = F, inherit.aes = F) +
 		scale_x_continuous(limits=c(1,3), breaks = c(1,2,3)) +
 		scale_y_continuous(name="",limits=c(0,50),sec.axis=sec_axis(trans=~./2.5, name="")) +
 		theme_classic() +
@@ -1045,7 +1045,7 @@ p1 = ggplot(all.cod, aes(x = Oxygen, y = Flow_phys, fill = Item)) +
 p2 = ggplot(all.cod, aes(x = Oxygen, y = Flow_hyp, fill = Item)) +
 		geom_area() + xlab("") + ylab("") + labs(title = "No MP", fill = "") +
 		geom_line(aes(x = Oxygen, y = 2.5*Size_hyp),linewidth=1,color="dodgerblue",linetype="dashed") +
-		geom_point(aes(x = Oxygen, y = 2.5*Size, fill = NA), data = size.df, shape = 17, color = "dodgerblue", show.legend = F) +
+		geom_point(aes(x = Oxygen, y = 2.5*Size), data = size.df, shape = 17, color = "dodgerblue", show.legend = F, inherit.aes = F) +
 		scale_fill_manual(values=c(col_benthos,col_plankton,col_cod,col_flounder,col_sprat,col_herring)) +
 		scale_x_continuous(limits=c(1,3), breaks = c(1,2,3)) +
 		scale_y_continuous(name="",limits=c(0,50),sec.axis=sec_axis(trans=~./2.5, name="")) +
