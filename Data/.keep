@@ -1,0 +1,23 @@
+Recall
+
+calibration period: 1991-2000
+projection period: 2001-2019
+
+Files
+
+cod_catch.csv: cod catch data from stock assessment
+flounder_catch.csv: flounder catch data from stock assessment
+sprat_catch.csv: sprat catch data from stock assessment
+herring_catch.csv: herring catch data from stock assessment
+[cod/flounder]_ivb.txt: Swedish SMALK data for cod/flounder used to fit annual inverse von Bertalanffy parameters during the calibration period
+[cod/flounder]_ivb_sim.txt: Swedish SMALK data for cod/flounder used to fit annual inverse von Bertalanffy parameters during the projection period
+[sprat/herring]_ivb.txt: BIAS data for sprat/herring used to fit annual inverse von Bertalanffy parameters during the calibration period
+[sprat/herring]_ivb_sim.txt: BIAS data for sprat/herring used to fit annual inverse von Bertalanffy parameters during the projection period
+[species]_ssb.txt: annual SSB estimates from stock assessments (cod, sprat, and herring) or assumed constant relative to cod (flounder)
+ICES_StatRec_depth.csv: depth from statistical rectangle data (downloaded from https://gis.ices.dk/sf/index.html?widget=StatRec#)
+ICES_StatRec_withSD.csv: depth from statistical rectangle data with ICES subdivision appended (downloaded from https://gis.ices.dk/sf/index.html?widget=StatRec#)
+oxy_model.rda: oxygen model fit with SMHI bottle data
+temp_model.rda: temperature model fit with SMHI data
+statrec_centroids.csv: centroids of ICES statistical rectangles
+catch_cal.csv: mean total catch for each species during the calibration period
+ssb_cal.csv: mean SSB for each species during the calibration period
