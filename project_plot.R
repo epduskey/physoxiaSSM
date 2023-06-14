@@ -1022,44 +1022,76 @@ for(i in 1:length(phys.scenarios)) {
 	all.cod$Size_hyp[ind] = hyp.scenarios[[i]]$size[1] / 1000
 }
 
+# Remove diet items that account for less than 2% of the flow
+all.cod = all.cod[!(all.cod$Item %in% c("Plankton","Cod","Flounder")), ]
+
 # Plot colors
 col_benthos = rgb(38, 24, 95, maxColorValue=255)
-col_plankton = rgb(0, 106, 168, maxColorValue = 255)
-col_cod = rgb(0, 166, 174, maxColorValue = 255)
-col_flounder = rgb(252, 255, 221, maxColorValue = 255)
+#col_plankton = rgb(0, 106, 168, maxColorValue = 255)
+#col_cod = rgb(0, 166, 174, maxColorValue = 255)
+#col_flounder = rgb(252, 255, 221, maxColorValue = 255)
 col_sprat = rgb(205, 240, 203, maxColorValue = 255)
 col_herring = rgb(119, 209, 181, maxColorValue = 255)
-col_all = c(col_benthos, col_plankton, col_cod, col_flounder, col_sprat, col_herring)
+col_all = c(col_benthos, col_sprat, col_herring)
 
-# Stacked area plot
+# Stacked area plots
 p1 = ggplot(all.cod, aes(x = Oxygen, y = Flow_phys, fill = Item)) +
-		geom_area() + xlab("") + ylab("") + labs(title = "MP", fill = "") +
+		geom_area() + xlab("") + ylab("") + labs(title = "MP", fill = "Item") +
 		scale_fill_manual(values=col_all) +
-		geom_line(aes(x = Oxygen, y = 2.5*Size_phys),linewidth=1,color="dodgerblue",linetype="dashed") +
-		geom_point(aes(x = Oxygen, y = 2.5*Size), data = size.df, shape = 17, color = "dodgerblue", show.legend = F, inherit.aes = F) +
-		scale_x_continuous(limits=c(1,3), breaks = c(1,2,3)) +
-		scale_y_continuous(name="",limits=c(0,50),sec.axis=sec_axis(trans=~./2.5, name="")) +
+		scale_x_reverse(limits=c(3,1), breaks = c(3,2,1)) +
+		scale_y_continuous(name="",limits=c(0,50)) +
 		theme_classic() +
 		theme(panel.border=element_rect(colour="black",fill=NA,linewidth=1))
 
 p2 = ggplot(all.cod, aes(x = Oxygen, y = Flow_hyp, fill = Item)) +
-		geom_area() + xlab("") + ylab("") + labs(title = "No MP", fill = "") +
-		geom_line(aes(x = Oxygen, y = 2.5*Size_hyp),linewidth=1,color="dodgerblue",linetype="dashed") +
-		geom_point(aes(x = Oxygen, y = 2.5*Size), data = size.df, shape = 17, color = "dodgerblue", show.legend = F, inherit.aes = F) +
-		scale_fill_manual(values=c(col_benthos,col_plankton,col_cod,col_flounder,col_sprat,col_herring)) +
-		scale_x_continuous(limits=c(1,3), breaks = c(1,2,3)) +
-		scale_y_continuous(name="",limits=c(0,50),sec.axis=sec_axis(trans=~./2.5, name="")) +
+		geom_area() + xlab("") + ylab("") + labs(title = "No MP", fill = "Item") +
+		scale_fill_manual(values=col_all) +
+		scale_x_reverse(limits=c(3,1), breaks = c(3,2,1)) +
+		scale_y_continuous(name="",limits=c(0,50)) +
+		theme_classic() +
+		theme(panel.border=element_rect(colour="black",fill=NA,linewidth=1))
+		
+# Size plots
+size.phys = as.data.frame(mapply(c, size.df[,c(1,2)], size.df[,c(1,3)]))
+size.phys$Origin = rep(c("Data","Model"), each = nrow(size.df))
+p3 = ggplot(size.phys, aes(x = Oxygen, y = Size, color = Origin, shape = Origin, size = Origin, linetype = Origin, linewidth = Origin)) + 
+		xlab("") + ylab("") + labs(title = "", color = "Origin") +
+		geom_point() + scale_shape_manual(values=c(17,26)) + scale_color_manual(values=rep("dodgerblue",2)) + scale_size_manual(values=c(2,0)) +
+		geom_line() + scale_linetype_manual(values=c(0,2)) + scale_linewidth_manual(values=c(0,1)) +
+		scale_x_reverse(limits = c(3,1), breaks = c(3,2,1)) +
+		scale_y_continuous(name="",limits=c(0,22),position="right") +
 		theme_classic() +
 		theme(panel.border=element_rect(colour="black",fill=NA,linewidth=1))
 
-p = ggarrange(p1, p2, ncol = 1, common.legend = T, legend = "top", labels = c("a.","b."))
+size.hyp = as.data.frame(mapply(c, size.df[,c(1,2)], size.df[,c(1,4)]))
+size.hyp$Origin = rep(c("Data","Model"), each = nrow(size.df))
+p4 = ggplot(size.hyp, aes(x = Oxygen, y = Size, color = Origin, shape = Origin, size = Origin, linetype = Origin, linewidth = Origin)) +
+		xlab("") + ylab("") + labs(title = "", color = "Origin") +
+		geom_point() + scale_shape_manual(values=c(17,26)) + scale_color_manual(values=rep("dodgerblue",2)) + scale_size_manual(values=c(2,0)) +
+		geom_line() + scale_linetype_manual(values=c(0,2)) + scale_linewidth_manual(values=c(0,1)) +
+		scale_x_reverse(limits=c(3,1), breaks = c(3,2,1)) +
+		scale_y_continuous(name="",limits=c(0,22),position="right") +
+		theme_classic() +
+		theme(panel.border=element_rect(colour="black",fill=NA,linewidth=1))
+
+# Get legends
+legend_p12 = ggarrange(get_legend(p1))
+legend_p34 = ggarrange(get_legend(p3))
+legends = ggarrange(legend_p12, legend_p34, ncol=2)
+
+# Combining plots
+rm_legend = function(p) {p + theme(legend.position = "none")}
+plots = ggarrange(rm_legend(p1), rm_legend(p3), rm_legend(p2), rm_legend(p4), nrow = 2, ncol = 2, labels = c("a.","","b.",""))
+
+# Plots + merged legends
+p = ggarrange(legends, plots, nrow = 2, common.legend = T, heights = c(0.15,0.85))
 
 # Initialize plot
-jpeg("Plots/cod_flowsize.jpg", width = 9, height = 16, units = 'cm', res = 600)
+jpeg("Plots/cod_flowsize.jpg", width = 14, height = 17, units = 'cm', res = 600)
 
 # Annotate the figure by adding a common labels
 annotate_figure(p,
-                bottom = text_grob("Oxygen (mL/L)", size = 12),
+                bottom = text_grob("Benthic oxygen (mL/L)", size = 12),
                 left = text_grob("Energy flow (kg/year)", size = 12, rot = 90),
                 right = text_grob("Body size (kg)", size = 12, rot = 270))
 
@@ -1254,9 +1286,9 @@ par(mfrow = c(2,2), mar = c(0.2,3,0.2,0), oma = c(5,2,3,10))
 # Metabolic costs for cod
 plot(met ~ oxy, data = cod_scale, axes = F,
      type = "l", lwd = 3, col = col.met,
-     xlim = c(1,3), ylim = c(1,2), 
+     xlim = c(1,3), ylim = c(1,1.6), 
      xlab = "", ylab = "")
-axis(2, at = seq(1,2,0.2), cex.axis = 1.2); box(); mtext("Cod", side = 3)
+axis(2, at = seq(1.6,1,-0.2), cex.axis = 1.2); box(); mtext("Cod", side = 3)
 polygon(x = c(oxy,rev(oxy)),
         y = c(cod_scale$met_min,rev(cod_scale$met_max)),
         border = NA, col = adjustcolor(col.met, alpha.f = 0.5))
@@ -1264,9 +1296,9 @@ polygon(x = c(oxy,rev(oxy)),
 # Metabolic costs for flounder
 plot(met ~ oxy, data = flounder_scale, axes = F,
      type = "l", lwd = 3, col = col.met,
-     xlim = c(1,3), ylim = c(1,2), 
+     xlim = c(3,1), ylim = c(1,1.6), 
      xlab = "", ylab = "")
-axis(2, at = seq(1,2,0.2), cex.axis = 1.2); box(); mtext("Flounder", side = 3)
+axis(2, at = seq(1.6,1,-0.2), cex.axis = 1.2); box(); mtext("Flounder", side = 3)
 polygon(x = c(oxy,rev(oxy)),
         y = c(flounder_scale$met_min,rev(flounder_scale$met_max)),
         border = NA, col = adjustcolor(col.met, alpha.f = 0.5))
@@ -1274,9 +1306,9 @@ polygon(x = c(oxy,rev(oxy)),
 # Down-scaling for cod
 plot(erp ~ oxy, data = cod_scale, axes = F,
      type = "l", lwd = 3, col = col.erp,
-     xlim = c(1,3), ylim = c(0,1), 
+     xlim = c(3,1), ylim = c(0,1), 
      xlab = "", ylab = "")
-axis(1, at = seq(3), cex.axis = 1.2); axis(2, at = seq(0,1,0.2), labels = c(0,0.2,0.4,0.6,0.8,1), cex.axis = 1.2); box()
+axis(1, at = seq(3,1), cex.axis = 1.2); axis(2, at = seq(0,1,0.2), labels = c(0,0.2,0.4,0.6,0.8,1), cex.axis = 1.2); box()
 polygon(x = c(oxy,rev(oxy)),
         y = c(cod_scale$erp_min,rev(cod_scale$erp_max)),
         border = NA, col = adjustcolor(col.erp, alpha.f = 0.5))
@@ -1299,9 +1331,9 @@ polygon(x = c(oxy,rev(oxy)),
 # Down-scaling for flounder
 plot(erp ~ oxy, data = flounder_scale, axes = F,
      type = "l", lwd = 3, col = col.erp,
-     xlim = c(1,3), ylim = c(0,1), 
+     xlim = c(3,1), ylim = c(0,1), 
      xlab = "", ylab = "")
-axis(1, at = seq(3), cex.axis = 1.2); axis(2, at = seq(0,1,0.2), labels = c(0,0.2,0.4,0.6,0.8,1), cex.axis = 1.2); box()
+axis(1, at = seq(3,1), cex.axis = 1.2); axis(2, at = seq(0,1,0.2), labels = c(0,0.2,0.4,0.6,0.8,1), cex.axis = 1.2); box()
 polygon(x = c(oxy,rev(oxy)),
         y = c(flounder_scale$erp_min,rev(flounder_scale$erp_max)),
         border = NA, col = adjustcolor(col.erp, alpha.f = 0.5))
