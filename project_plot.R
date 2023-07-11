@@ -1286,7 +1286,7 @@ par(mfrow = c(2,2), mar = c(0.2,3,0.2,0), oma = c(5,2,3,10))
 # Metabolic costs for cod
 plot(met ~ oxy, data = cod_scale, axes = F,
      type = "l", lwd = 3, col = col.met,
-     xlim = c(1,3), ylim = c(1,1.6), 
+     xlim = c(3,1), ylim = c(1,1.6), 
      xlab = "", ylab = "")
 axis(2, at = seq(1.6,1,-0.2), cex.axis = 1.2); box(); mtext("Cod", side = 3)
 polygon(x = c(oxy,rev(oxy)),
@@ -1360,7 +1360,7 @@ mtext("Proportion of baseline", side = 2, cex = 1.2, outer = T)
 # Add legend
 par(fig = c(0,1,0,1), oma = c(0,0,0,0), mar = c(0,0,0,0), new = T)
 plot(0, 0, type = 'l', bty = 'n', xaxt = 'n', yaxt = 'n')
-legend("right", bty = "n", c("Metabolic costs","Activity","Consumption","FCE","Egg survival"), cex = 1,
+legend("right", bty = "n", c("Metabolic costs","Search rate","Consumption","FCE","Egg survival"), cex = 1,
        lwd = 3, col = c(col.met,col.act,col.ing,col.fce,col.erp))
 par(mfrow = c(1,1))
 
